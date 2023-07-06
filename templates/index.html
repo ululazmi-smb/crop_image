@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Home Page</title>
+</head>
+<body>
+<div class="container p-3 my-3 border">
+    <h2>Select an image to upload and display</h2>
+    <p>
+        {% if uploaded %}
+            <ul>
+                <li>Image successfully uploaded and displayed below</li>
+            </ul>
+        {% endif %}
+    </p>
+
+    <div>
+        <form method="post" action="/" enctype="multipart/form-data">
+            <dl>
+                <p>
+                    <input type="file" name="file" autocomplete="off" class="form-control-file border" required>
+                </p>
+            </dl>
+            <p>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </p>
+        </form>
+    </div>
+
+    {% if uploaded %}
+        <div>
+            <img src="{{ url_for('static', filename='images/uploaded/' + filename) }}">
+        </div>
+
+        <div>
+            <form action="/crop/{{ filename }}">
+                <dl>
+                    <p>
+                        <label for="size">Size:</label>
+                        <input type="text" name="size" class="form-control">
+                    </p>
+                </dl>
+                <label for="position">Position:</label>
+                <select name="position" id="position" class="form-control">
+                    <option value="top_left">Top left</option>
+                    <option value="top_center">Top center</option>
+                    <option value="top_right">Top right</option>
+                    <option value="center_left">Center left</option>
+                    <option value="center">Center</option>
+                    <option value="center_right">Center right</option>
+                    <option value="bottom_left">Bottom left</option>
+                    <option value="bottom_center">Bottom center</option>
+                    <option value="bottom_right">Bottom right</option>
+                </select>
+                <p>
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                </p>
+            </form>
+        </div>
+    {% endif %}
+</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Output</title>
+</head>
+<body>
+    <h1>Output</h1>
+    {% if cropped_image %}
+        <img src="{{ url_for('static', filename='images/cropped/output.jpg') }}" alt="Cropped Image">
+    {% else %}
+        <p>No cropped image available.</p>
+    {% endif %}
+</body>
+</html>
